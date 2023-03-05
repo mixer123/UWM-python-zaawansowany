@@ -20,7 +20,7 @@ class PassengerCar(Car):
     def load(self, passengers):
         self.capacity += passengers
 
-    def __str__(self):
+    def __repr__(self):
         return f"PassengerCar: {self.serial},{self.capacity}"
 
 

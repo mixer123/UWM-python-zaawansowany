@@ -7,7 +7,7 @@ class Book:
         self.price = price
 
     def __lt__(self, other):
-        return len(self.title) <= len(other.title)
+        return len(self.title) <  len(other.title)
 
     def __repr__(self):
         return f'{self.title} {self.price} {self.author}'

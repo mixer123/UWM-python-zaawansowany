@@ -4,6 +4,13 @@ Klasa powinna zawierać metody magiczne __add__ oraz __radd__,
  aby umożliwić dodawanie dwóch wektorów 2D oraz dodawanie krotek (x, y) do wektorów.
 '''
 
+class Point:
+    def __init__(self, x , y):
+        self.x = x
+        self.y = y
+    def __repr__(self):
+        return self.x, self.y
+
 class Vector2D:
     def __init__(self, x, y):
         self.x = x
@@ -15,14 +22,15 @@ class Vector2D:
     def __add__(self, other):
         return self.x + other.x, self.y + other.y
 
-# To też działa
+#Dodawanie krotki do wektora
+    def __radd__(self, other):
+        return Vector2D(self.x + other.x, self.y + other.y)
 
-    # def __add__(self, other):
-    #     return other.x + self.x, other.y + self.y
-
+tupla = Point(1,2)
 v1 = Vector2D(2,3)
 v2 = Vector2D(4,5)
+print('Wektor + tupla', v1+tupla)
 v3 = v2 + v1
 v4 = v1 + v2
-print(v3)
-print(v4)
+print('Suma wektorów', v3)
+print('Suma wektorów', v4)

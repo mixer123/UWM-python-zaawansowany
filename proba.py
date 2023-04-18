@@ -1,1 +1,1 @@
-# cos
+print(type(2))

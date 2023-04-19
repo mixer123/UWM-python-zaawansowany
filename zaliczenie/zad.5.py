@@ -6,9 +6,16 @@ Zadanie 5. Napisz klasę Playlist, która będzie reprezentować listę odtwarza
  uzyskiwanie utworów z listy odtwarzania oraz ustawianie wartości utworów na liście odtwarzania.
 '''
 
+class Song:
+    def __init__(self, list_songs):
+        self.list_songs = list_songs
+
 class Playlist:
     def __init__(self, list_songs):
         self.list_songs = list_songs
+
+    def __radd__(self, other_obj):
+        return Playlist(self.list_songs.append(other_obj.list_songs))
 
     #Łączenie list
     def __add__(self, other):
@@ -23,10 +30,11 @@ class Playlist:
     def __getitem__(self, number_song):
         return self.list_songs[number_song]
 
-
     def __str__(self):
         return f'{self.list_songs}'
 
+
+s1 = Song('Onewayticket')
 p1 = Playlist(['u1','u2'])
 p2 = Playlist(['u111','u211'])
 print(p1)
@@ -34,3 +42,5 @@ print(p1 + p2)
 p1[0]='Jamajka'
 print(p1)
 print(p1[0])
+print(p1+s1)
+print(s1.list_songs)

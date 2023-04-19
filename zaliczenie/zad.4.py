@@ -26,18 +26,33 @@ class Polynomial:
     def __repr__(self):
         return f'{self.factors_}'
 
+
+
     def __add__(self, other):
-        sum_factors = [i + j for i, j in zip(self.factors_, other.factors_)]
-        if len(self.factors_) == len(other.factors_):
-            return [i + j for i, j in zip(self.factors_, other.factors_)]
-        elif len(self.factors_) > len(other.factors_):
+        if isinstance(other, Polynomial):
             sum_factors = [i + j for i, j in zip(self.factors_, other.factors_)]
-            sum_factors.append(self[-1])
-            return sum_factors
-        elif len(self.factors_) < len(other.factors_):
+            if len(self.factors_) == len(other.factors_):
+                return [i + j for i, j in zip(self.factors_, other.factors_)]
+            elif len(self.factors_) > len(other.factors_):
                 sum_factors = [i + j for i, j in zip(self.factors_, other.factors_)]
-                sum_factors.append(other[-1])
+                sum_factors.append(self[-1])
                 return sum_factors
+            elif len(self.factors_) < len(other.factors_):
+                    sum_factors = [i + j for i, j in zip(self.factors_, other.factors_)]
+                    sum_factors.append(other[-1])
+                    return sum_factors
+            if type(other) in (int, float):
+                return Polynomial([a + other for a in self.factors_])
+            return NotImplemented
+
+    def __radd__(self, other):
+        if type(other) in (int, float):
+            return Polynomial([a + other for a in self.factors_])
+        return NotImplemented
+
+
+
+
 
 
 
@@ -59,6 +74,10 @@ p2[4] = 24
 print(p1)
 print(p2)
 p3= p1+p2
-print(p3[0])
+print(p3)
+
+print('Dodawanie liczby do wektora')
+p11 = p1 + 2
+print(p11)
 
 

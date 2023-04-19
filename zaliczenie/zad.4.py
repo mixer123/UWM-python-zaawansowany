@@ -3,13 +3,19 @@ Zadanie 4. Napisz klasę Polynomial, która będzie reprezentować wielomian jed
 Klasa powinna zawierać metody magiczne __add__, __radd__, __getitem__ oraz __setitem__,
  aby umożliwić dodawanie dwóch wielomianów, dodawanie liczby rzeczywistej do wielomianu,
  uzyskiwanie współczynników wielomianu oraz ustawianie wartości współczynników.
+
+
 '''
 
 class Polynomial:
     def __init__(self, count_factors):
         self.factors_ = [None]  * count_factors
         ''' factors_ to jest lista wspolczynnikow wielomianu count_factors okresla
-        ile tych wspolczynnikow jest'''
+        ile tych wspolczynnikow jest
+        Uwaga !!
+        W(x) = a_0 + a_1 x^1 + ... +a_n x^n
+        a_0 to pierwszy wspolczynnik listy self.factors_
+        '''
 
     def __setitem__(self, factor_number, value):
         self.factors_[factor_number] = value

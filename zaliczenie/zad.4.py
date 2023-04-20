@@ -9,10 +9,9 @@ Klasa powinna zawierać metody magiczne __add__, __radd__, __getitem__ oraz __se
 
 class Polynomial:
     def __init__(self, count_factors):
-        self.factors_ = [None]  * count_factors
-        ''' factors_ to jest lista wspolczynnikow wielomianu count_factors okresla
-        ile tych wspolczynnikow jest
-        Uwaga !!
+        self.factors_ = count_factors
+        ''' factors_ to jest lista wspolczynnikow wielomianu 
+                Uwaga !!
         W(x) = a_0 + a_1 x^1 + ... +a_n x^n
         a_0 to pierwszy wspolczynnik listy self.factors_
         '''
@@ -41,9 +40,9 @@ class Polynomial:
                     sum_factors = [i + j for i, j in zip(self.factors_, other.factors_)]
                     sum_factors.append(other[-1])
                     return sum_factors
-            if type(other) in (int, float):
+        if type(other) in (int, float):
                 return Polynomial([a + other for a in self.factors_])
-            return NotImplemented
+        return NotImplemented
 
     def __radd__(self, other):
         if type(other) in (int, float):
@@ -57,27 +56,33 @@ class Polynomial:
 
 
 
-p1 = Polynomial(6)
-p2 = Polynomial(5)
+p1 = Polynomial([1,2,3,4,5,6])
+p2 = Polynomial([3,4,5,4,5])
+# Setery Setery Setery Setery
 p1[0] = 2
 p1[1] = 21
 p1[2] = 23
 p1[3] = 24
 p1[4] = 24
 p1[5] = 24
-
 p2[0] = 2
 p2[1] = 21
 p2[2] = 23
 p2[3] = 24
 p2[4] = 24
+print('Getery')
+print(p1[0], p2[0])
 print(p1)
 print(p2)
+print('Dodawanie wektorów')
 p3= p1+p2
 print(p3)
 
-print('Dodawanie liczby do wektora')
+print(f'Dodawanie wektora do liczby: {p1} + 2')
 p11 = p1 + 2
 print(p11)
+print(f'Dodawanie liczby do wektora: 3+ {p1}')
+p12 = 3+ p1
+print(p12)
 
 

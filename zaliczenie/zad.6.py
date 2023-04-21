@@ -16,14 +16,18 @@ from datetime import datetime
 class Car:
     def __init__(self,  make, model, year, mileage,price ):
 
-        self.make = make
-        self.model = model
-        self.year = year
-        self.mileage = mileage
-        self.price = price
+        self._make = make
+        self._model = model
+        self._year = year
+        self._mileage = mileage
+        self._price = price
+        if self._mileage < 0:
+            raise ValueError('Błąd wartości')
+        if self._price < 0:
+            raise ValueError('Błąd wartości')
 
     def __repr__(self):
-        return f'{self.make, self.model, self.year, self.mileage, self.price}'
+        return f'{self._make, self._model, self._year, self._mileage, self._price}'
     # Właściwość getter
     @property
     def mileage(self):
@@ -48,16 +52,16 @@ class Car:
     def drive(self, value):
         if value <0:
             raise ValueError('Błąd wartości')
-        self.mileage = value
-        return self.mileage
+        self._mileage = value
+        return self._mileage
 
 #    Kalkulacja wartości 1 rok = 1% mniej , 10000 km = 1% mniej
 
     def calculate_depreciation(self):
         current_year = datetime.now().year
-        years_depreciation_percents = (current_year - self.year) / 100
-        mileage_depreciation_percents = (self.mileage // 10000) / 100
-        value_car  = round(self.price * (1- (years_depreciation_percents + mileage_depreciation_percents)))
+        years_depreciation_percents = (current_year - self._year) / 100
+        mileage_depreciation_percents = (self._mileage // 10000) / 100
+        value_car  = round(self._price * (1- (years_depreciation_percents + mileage_depreciation_percents)))
         return value_car
 
 

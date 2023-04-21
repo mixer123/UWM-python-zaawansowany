@@ -8,27 +8,69 @@ Klasa powinna zawierać atrybuty instancyjne make, model, year, mileage oraz pri
     (aktualizującą przebieg samochodu) oraz calculate_depreciation
      (obliczającą spadek wartości samochodu na podstawie jego przebiegu i wieku).
 '''
-class MyException(Exception):
-    def __init__(self, message):
-        self.message = message
+# class MyException(Exception):
+#     def __init__(self, message):
+#         self.message = message
+
+from datetime import datetime
 class Car:
-    def __init__(self,make, model, year, mileage ,price ):
+    def __init__(self,  make, model, year, mileage,price ):
+
         self.make = make
         self.model = model
         self.year = year
         self.mileage = mileage
         self.price = price
 
+    def __repr__(self):
+        return f'{self.make, self.model, self.year, self.mileage, self.price}'
     # Właściwość getter
     @property
     def mileage(self):
-        return self.mileage
+        return self._mileage
 
     @mileage.setter
     def mileage(self, value):
-        # if value < 0:
-        #     raise MyException("Wstaw wartość dodatnią")
-        self.mileage = value
+        if value < 0:
+            raise ValueError('Błąd wartości')
+        self._mileage = value
 
-# make, model, year, mileage, price,
-car1 = Car('toyota', 'corola',1934,2021,123455)
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        if value < 0:
+            raise ValueError('Błąd wartości')
+        self._price = value
+
+    def drive(self, value):
+        if value <0:
+            raise ValueError('Błąd wartości')
+        self.mileage = value
+        return self.mileage
+
+#    Kalkulacja wartości 1 rok = 1% mniej , 10000 km = 1% mniej
+
+    def calculate_depreciation(self):
+        current_year = datetime.now().year
+        years_depreciation_percents = (current_year - self.year) / 100
+        mileage_depreciation_percents = (self.mileage // 10000) / 100
+        value_car  = round(self.price * (1- (years_depreciation_percents + mileage_depreciation_percents)))
+        return value_car
+
+
+
+car1 = Car('toyota', 'corola',2021,2021,123455)
+car1.mileage = 20000 #  to dzięki setter
+print('Obecny stan wartości auta', car1) # tu wyświetli m.in. pole mileage
+try:
+ car1.drive(345)
+except ValueError:
+    print(car1, 'Nie dokonano zmiany')
+print('Wartości po zmianach' , car1)
+print('Cena auta nowego', car1.price)
+print('Spadek wartości czyli aktualna cena ',car1.calculate_depreciation())
+
+# make, model, year, mileage,price

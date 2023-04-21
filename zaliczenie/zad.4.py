@@ -11,11 +11,7 @@ class Polynomial:
     def __init__(self, count_factors):
         self.factors_ = count_factors
         ''' factors_ to jest lista wspolczynnikow wielomianu 
-<<<<<<< HEAD
         Uwaga !!
-=======
-                Uwaga !!
->>>>>>> 5f4460e0d26e5bb2ef28cba5fb88b001d1de4430
         W(x) = a_0 + a_1 x^1 + ... +a_n x^n
         a_0 to pierwszy wspolczynnik listy self.factors_
         '''
@@ -53,18 +49,8 @@ class Polynomial:
             return Polynomial([a + other for a in self.factors_])
         return NotImplemented
 
-
-
-
-
-
-
-
 p1 = Polynomial([1,2,3,4,5,6])
-
 p2 = Polynomial([1,2,3,4,5,6])
-
-p2 = Polynomial([3,4,5,4,5])
 # Setery Setery Setery Setery
 
 p1[0] = 2
@@ -85,13 +71,10 @@ print(p2)
 print('Dodawanie wektorów')
 p3= p1+p2
 print(p3)
-
-
 print('Dodawanie liczby do wektora')
 print('p1',p1)
 p11 = 2 +p1
 print('p11',p11)
-
 print(f'Dodawanie wektora do liczby: {p1} + 2')
 p11 = p1 + 2
 print(p11)
